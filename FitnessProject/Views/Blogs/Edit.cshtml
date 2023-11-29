@@ -1,0 +1,104 @@
+﻿@model FitnessProject.ViewModels.PostViewModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutPage2.cshtml";
+}
+
+<style>
+    h2 {
+        margin-top: 150px;
+    }
+
+    a {
+        color: black;
+    }
+
+    /* Tùy chỉnh chiều rộng của form */
+    .custom-form {
+        max-width: 600px;
+        margin: auto;
+    }
+
+    /* Tùy chỉnh kích thước của các ô nhập liệu */
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+    }
+
+    /* Tùy chỉnh chiều cao của ô hiển thị nội dung */
+    .form-group textarea {
+        height: 200px;
+    }
+
+    /* Tùy chỉnh kích thước nút Save */
+    .btn-save {
+        width: 50px; /* Điều chỉnh kích thước theo ý muốn */
+    }
+
+    /* Tùy chỉnh kích thước ảnh hiển thị */
+    .img-preview {
+        max-width: 100%;
+        max-height: 200px;
+        margin-top: 10px;
+    }
+</style>
+
+<div class="container mt-4 custom-form">
+    <h2>Edit Post</h2>
+
+    @using (Html.BeginForm("Edit", "Blogs", FormMethod.Post, new { @class = "needs-validation", novalidate = "true", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.HiddenFor(model => model.Post.id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Post.title, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.Post.title, new { @class = "form-control", required = "required" })
+            @Html.ValidationMessageFor(model => model.Post.title, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Post.content, new { @class = "control-label" })
+            @Html.TextAreaFor(model => model.Post.content, new { @class = "form-control", rows = 4, required = "required" })
+            @Html.ValidationMessageFor(model => model.Post.content, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Post.category_id, "Category", new { @class = "control-label" })
+            @if (Model.Categories != null)
+            {
+                @Html.DropDownListFor(model => model.Post.category_id, new SelectList(Model.Categories, "id", "category_name"), "-- Select Category --", new { @class = "form-control", required = "required" })
+            }
+            else
+            {
+                <p class="text-danger">Categories are not available.</p>
+            }
+            @Html.ValidationMessageFor(model => model.Post.category_id, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Upload Image", new { @class = "control-label" })
+            <input type="file" name="image" accept="image/*" class="form-control" />
+            @Html.ValidationMessageFor(model => model.Post.images, "", new { @class = "text-danger" })
+
+            <!-- Hiển thị ảnh preview (nếu có) -->
+            @if (!string.IsNullOrEmpty(Model.Post.images))
+            {
+                <img src="@Model.Post.images" class="img-preview" />
+            }
+        </div>
+
+        <div class="form-group d-flex justify-content-center align-items-center">
+            <div class="row">
+                <div class="col">
+                    <button type="submit" class="btn btn-primary btn-save">Save</button>
+                </div>
+                <div class="col">
+                    <a href="@Url.Action("MyBlogs", "Blogs")" class="btn btn-secondary">Cancel</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
