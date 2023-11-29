@@ -1,0 +1,123 @@
+﻿@model FitnessProject.Models.User
+
+@{
+    Layout = null;
+    bool isRegister = Session["IsRegister"] as bool? ?? false;
+
+
+
+
+}
+
+<!doctype html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <style>
+        .close {
+            position: absolute;
+            right: 4px;
+            top: 5px;
+        }
+
+            .close a {
+                font-size: 30px;
+                font-weight: 700;
+                color: #dead90;
+            }
+
+            .close:hover {
+                cursor: pointer;
+                color: #808080;
+                transition: all 3ms ease-in-out;
+            }
+    </style>
+
+    <title>Register</title>
+
+    <link rel="stylesheet" href="~/assets/css/login.css">
+
+</head>
+
+<body>
+    <!-- partial:index.partial.html -->
+
+    <section>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+
+        <div class="signin">
+            <div class="close"><a style="text-decoration: none;" href="/Home/Index">X</a></div>
+
+            <div class="content">
+
+                <h2>Register</h2>
+
+                <form class="form" method="post" style="gap:1px">
+
+                    <div class="inputBox">
+
+                        <input name="username" type="text" required> <i>Username</i>
+
+                    </div>
+
+                    <div class="inputBox">
+
+                        <input id="password" name="password" type="password" required> <i>Password</i>
+
+                    </div>
+                    <div class="inputBox">
+
+                        <input id="confirmPassword" name="ConfirmPassword" type="password" required oninput="validatePasswords()"> <i>Confirm Password</i>
+                        <span id="passwordError" style="color: red; display: none;">Password and Confirm Password do not match</span><br>
+
+                    </div>
+
+                    <div class="links">
+                        <a href="#"></a> <a href="/Account/Login">Signin</a>
+
+                    </div>
+
+                    <div class="inputBox">
+
+                        <button type="submit">Register</button>
+
+                    </div>
+
+
+                </form>
+                @if (isRegister)
+                {
+                    <p style="font-size:16px;color:red">Thêm Thất Bại</p>
+
+                }
+                else
+                { <p></p>}
+            </div>
+
+        </div>
+
+    </section> <!-- partial -->
+
+    <script>
+        function validatePasswords() {
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirmPassword").value;
+
+            if (password !== confirmPassword) {
+                document.getElementById("passwordError").style.display = "block";
+                document.getElementById("passwordError").style.width = "100%";
+                document.getElementById("passwordError").style.height = "max-content";
+                document.getElementById("passwordError").style.fontSize = "14px";
+            } else {
+                document.getElementById("passwordError").style.display = "none";
+            }
+        }
+    </script>
+
+
+</body>
+
+</html>

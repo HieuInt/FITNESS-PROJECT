@@ -1,0 +1,77 @@
+﻿@{
+    Layout = null;
+    bool isLoggedIn = Session["IsLoggedIn"] as bool? ?? false; // Kiểm tra trạng thái đăng nhập
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <!-- Box-icon -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="~/assets/css/blogs.css">
+</head>
+<body>
+    <header>
+        <div class="nav container">
+            <a href="#" class="logo"><span>Fitness</span></a>
+            <a href="/Home/Index" class = "nav__header">
+                Home
+            </a>
+            @if (isLoggedIn)
+            {
+                <a href="/Home/ProFile" id="Users-nav" style="background-color: rgba(0, 0, 0,0.5); border-radius: 55px; display: flex; padding: 10px; justify-content: center; align-items: center;" class="login"><img style=" border: 2px solid;border-radius:40px;background-color:rgba(0,255,255,0.4)" src="~/assets/images/class-icon-3.png" /></a>
+            }
+            else {<a href="/Account/Login" class="login">Login</a> }
+                
+
+
+        </div>
+    </header>
+    @RenderBody();
+
+    <footer>
+        <div class="footer-container">
+            <div class="sec aboutus">
+                <h2>About Us</h2>
+                <p style="text-align:justify; width:80%;">
+                    Chào mừng bạn đến với trang web tập gym của chúng tôi, nơi mang đến trải nghiệm hoàn toàn mới về sức khỏe và thể dục! Tại đây, chúng tôi cam kết đem đến cho bạn không gian tập luyện hiện đại và chất lượng, cùng với đội ngũ HLV chuyên nghiệp để hỗ trợ bạn đạt được mục tiêu tập luyện cá nhân
+                </p>
+                <ul class="sci">
+                    <li><a href="#"><i class="bx bxl-facebook"></i></a></li>
+                    <li><a href="#"><i class="bx bxl-instagram"></i></a></li>
+                    <li><a href="#"><i class="bx bxl-twitter"></i></a></li>
+                    <li><a href="#"><i class="bx bxl-linkedin"></i></a></li>
+                </ul>
+            </div>
+            <div class="sec quicklinks">
+                <h2>Quick Links</h2>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </div>
+            <div class="sec contactBx">
+                <h2>Contact Info</h2>
+                <ul class="info">
+                    <li>
+                        <span><i class='bx bxs-map'></i></span>
+                        <span>Tầng 10 tòa nhà Kim khí Thăng Long, 01 Lương Yên, Hai Bà Trưng, Hà Nội</span>
+                    </li>
+                    <li>
+                        <span><i class='bx bx-envelope'></i></span>
+                        <p><a href="mailto:taipham@gmail.com">taipham@gmail.com</a></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="~/assets/js/blog.js" defer></script>
+</body>
+</html>

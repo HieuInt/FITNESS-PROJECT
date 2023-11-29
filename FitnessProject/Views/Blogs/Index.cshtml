@@ -1,0 +1,204 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+    bool IsLogged = Session["IsLoggedIn"] as bool? ?? false;
+}
+
+@model FitnessProject.ViewModels.PostViewModel
+<style>
+    #swp-Addpost {
+        position: fixed;
+        width: 500px;
+        height: 480px;
+        background-color: #ffffff;
+        box-shadow: 0 4px 8px rgba(159, 33, 33, 0.4);
+        left: 50%;
+        top: 50%;
+        border-radius: 20px;
+        transform: translate(-50%,-50%);
+    }
+    
+    #floatingForm {
+        display: none;
+        position: fixed;
+        z-index: 60;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    #formContent {
+        position: relative;
+        text-align: center;
+        height: 100%;
+    }
+
+        #formContent h2 {
+            padding: 40px 0 20px 0;
+        }
+
+        #formContent .Add-container {
+            height: 100vh;
+        }
+
+            #formContent .Add-container .PostContent {
+                display: flex;
+                flex-direction: column;
+                gap: 25px;
+                align-items: center;
+            }
+
+    .close {
+        position: absolute;
+        top: -10px;
+        right: 5px;
+        font-size: 40px;
+        cursor: pointer;
+        color: rgba(151, 8, 8, 0.827);
+    }
+</style>
+
+
+
+
+<div id="floatingForm" class="hidden">
+    <div id="swp-Addpost">
+        <div id="formContent">
+            <span class="close" onclick="closeForm()">&times;</span>
+            <h2>Thêm Bài Viết</h2>
+            <form  method="post">
+
+                <div class="Add-container">
+                    <!-- <div class="col-md-6">
+                    <img src="https://i.imgur.com/09p117l.jpg" class="img-fluid" alt="Hình ảnh sản phẩm">
+                    </div> -->
+                    <div class="PostContent">
+                        <div style="display:flex;">
+                            <label style="margin-right:4px">Chọn chủ đề:</label>
+                            <select style="border:none;" id="category" name="category_id">
+                                <option value="1">Food</option>
+                                <option value="2">Health</option>
+                                <option value="3">Exercise</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="title" name="title" placeholder="Nhập tiêu đề bài viết" style="border-radius: 5px;width: 400px;height: 40px;border:none;">
+                        </div>
+
+                        <div class="form-group">
+                            <textarea class="" id="content" name="content" rows="5" autocomplete="off" placeholder="Hãy kết nối với chúng tôi bằng sự thông thái của bạn" style="border-radius: 3px;border: 1px solid #f0e9e9; color:#333;width: 400px;height: 100px;font-family: sans-serif;padding: 3px 0 0 3px;">
+                            </textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label style="font-size: 14px; font-weight: 300;font-family: sans-serif;" for="image">Ảnh/Video</label>
+                            <input type="file" class="form-control" id="images" name="images" style="border-radius: 10px; background-color: #d9edf7; color: #333;">
+                        </div>
+                        <div style="" class="form-group">
+                            <label style="font-size: 14px; font-weight: 300;font-family: sans-serif;" for="image">Tác giả: </label>
+                                    <div class="form-group">
+                                        <label style="font-size: 14px; font-weight: 300; font-family: sans-serif;" for="image">Tác giả: </label>
+                                        <input type="text" class="form-control" id="FullName" name="author" value="@Model.FullName" placeholder="Nhập tiêu đề bài viết" style="border-radius: 5px;width: 400px;height: 40px;border:none;">
+                                        <i>@Model.FullName</i>
+                                    </div>                              
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: 14px; font-weight: 300;font-family: sans-serif;" for="image">Ngày đăng: </label>
+                            <input type="date" class="form-control"  id="posting_date" name="posting_date" style="border-radius: 10px; background-color: #d9edf7; color: #333;" readonly>
+                        </div>
+                        <div style="display:none" class="form-group">
+                            <input type="text" class="form-control" id="status" name="status" value="chờ đăng" style="border-radius: 5px;width: 400px;height: 40px;border:none;">
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="border-radius: 6px; background-color: #e8dede;height: 44px;width: 70px;border: none;">Đăng bài</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<main>
+    <section class="home" id="home">
+        <div class="home-text container">
+            <h2 class="home-title" style="color: #272727;">Trend Blogger</h2>
+            <span class="home-subtitle" style="color: #272727;">Your source of great content</span>
+        </div>
+    </section>
+
+    <section class="about container" id="about">
+        <div class="contentBx">
+            <h2 class="titleText">Bắt kịp xu hướng</h2>
+            <p class="title-text">
+                Công ty của chúng tôi đã đạt được một thành công đáng kể. Đội ngũ nhân viên không chỉ hoàn thành công việc với sự hạnh phúc mà còn với lòng cam kết, chúng tôi cung cấp mọi hỗ trợ có thể.Tôi không thích việc đánh mất mình vì sự khác biệt, mà thay vào đó, chúng tôi coi đó là một cơ hội để phát triển và đổi mới.
+                <br>Công ty chúng tôi đã đạt được thành công đáng kể. Tuy nhiên, liệu người đó có thể trải nghiệm niềm vui nếu không có sự nịnh nọt từ khi mới sinh ra?
+            </p>
+            <a href="#" class="btn2">Read more</a>
+        </div>
+        <div class="imgBx">
+            <img src="~/assets/images/class-4.jpg" alt="" class="fitBg">
+        </div>
+    </section>
+    <div style="display: flex;justify-content: center;align-items: center;position: relative;">
+        <div class="post-filter container">
+            <span class="filter-item active-filter" data-filter="all">All</span>
+            <span class="filter-item" data-filter="tech">health</span>
+            <span class="filter-item" data-filter="food">Food</span>
+            <span class="filter-item" data-filter="news">practice</span>
+        </div>
+        <button id="openFormButton" onclick="checkAndOpenForm()" style="cursor:pointer;position: absolute;bottom: 0;right: 240px;border: 1px solid #e8dede;height: 40px;width: 100px;background-color: #8fb8cc;border-radius: 4px;margin-left: 600px;" class="">Thêm bài</button>
+    </div>
+
+
+    <div class="post container">
+
+        @foreach (var post in Model.Posts)
+        {
+            <div class="post-box tech">
+                <img src="~/assets/images/img1.jpg" alt="" class="post-img">
+                <h2 class="category">@post.Category.category_name</h2>
+                <a href="#" class="post-title">@post.title</a>
+                <span class="post-date">12 Feb 2022</span>
+                <p class="post-description">@post.content</p>
+                <div class="profile">
+                    <img src="~/assets/images/testi1.jpg" alt="" class="profile-img">
+                    <span class="profile-name">MKHB</span>
+                </div>
+            </div>
+
+        }
+
+    <script>
+
+
+        function checkAndOpenForm() {
+        var isLoggedIn = @(IsLogged ? "true" : "false");
+
+        if (isLoggedIn != null && isLoggedIn) {
+            document.getElementById('floatingForm').style.display = 'block';
+        } else {
+            window.location.href = '@Url.Action("Login", "Account")';
+        }
+        }
+        function closeForm() {
+            document.getElementById('floatingForm').style.display = 'none';
+        }
+        var currentDate = new Date();
+
+        // Format ngày thành chuỗi YYYY-MM-DD, tương ứng với ngày hiện tại
+        var formattedDate = currentDate.toISOString().split('T')[0];
+
+        // Đặt giá trị của input là ngày hiện tại
+        document.getElementById('posting_date').value = formattedDate
+        // Đặt log bên trong hàm hoặc kiểm tra trực tiếp trong DevTools
+        
+    </script>
+    </div>
+</main>
+
+
+
+
+

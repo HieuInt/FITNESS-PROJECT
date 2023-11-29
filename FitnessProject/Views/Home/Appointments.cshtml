@@ -1,0 +1,110 @@
+﻿@model FitnessProject.Models.appointment
+
+@{
+    Layout = null;
+}
+
+
+
+<!doctype html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Login</title>
+    <style>
+        section .signin .content .form .inputBox{
+            margin:0 !important;
+        }
+        section .signin .content .form{
+            gap:0 !important;
+        }
+        section .signin{
+            width:500px !important;
+        }
+    </style>
+
+    <link rel="stylesheet" href="~/assets/css/login.css">
+
+</head>
+
+<body>
+    <!-- partial:index.partial.html -->
+
+    <section>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+
+        <div class="signin">
+
+            <div class="content">
+
+                <h2>Đăng kí lịch hẹn</h2>
+
+                <form style="gap:0;" class="form" method="post">
+
+                    
+
+                    <div class="form">
+                        <div class="inputBox">
+
+                            <input type="hidden" name="client_id" value="@ViewBag.ClientId">
+                            <i>ID: @ViewBag.ClientId</i>
+
+                        </div>
+
+                        <div class="inputBox">
+
+                            <input type="text" class="form-control" id="Fullname" name="name" required> <i>Name</i>
+
+                        </div>
+
+                        <div class="inputBox">
+
+                            <input type="text" class="form-control" id="Phone" name="phone" required> <i>Phone</i>
+
+                        </div>
+                        <div class="inputBox">
+
+                            <input type="text" class="form-control" id="Email" name="email" required> <i>Email</i>
+
+                        </div>
+                        <div class="inputBox">
+
+                            <input type="text" class="form-control" id="Taget" name="target" required> <i>Taget</i>
+
+                        </div>
+                        <div class="inputBox">
+
+                            <input type="text" class="form-control" id="Package" name="package" required> <i>Package</i>
+
+                        </div>
+                        <div class="inputBox">
+
+                            <input type="datetime-local" class="" id="Appointment_date" name="appointment_date" required><i>Appointment date</i>
+
+                        </div>
+
+
+
+
+                        <div class="inputBox">
+
+                            <button type="submit">Đăng Kí</button>
+
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+
+    </section> <!-- partial -->
+
+</body>
+
+</html>
+

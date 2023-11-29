@@ -1,0 +1,219 @@
+﻿@model IEnumerable<FitnessProject.Models.Post>
+
+@{
+    ViewBag.Title = "Post";
+    Layout = "~/Areas/Admin/Views/Shared/admin_layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Post</title>
+    <style>
+        /* Add your custom CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            cursor: pointer;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        .btn-primary {
+            color: #fff;
+            background-color: #337ab7;
+            border-color: #2e6da4;
+        }
+
+        .btn-danger {
+            color: #fff;
+            background-color: #d9534f;
+            border-color: #d43f3a;
+        }
+
+        .btn-warning {
+            color: #fff;
+            background-color: #f0ad4e;
+            border-color: #eea236;
+        }
+    </style>
+
+    <!-- Sử dụng jQuery phiên bản 3.6.4 từ CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script>
+        function confirmDelete(id) {
+            var result = confirm("Bạn có chắc muốn xóa người dùng này không?");
+            if (result) {
+                console.log("Đang xóa người dùng với ID: " + id);
+
+                // Tạo FormData
+                var formData = new FormData();
+
+                // Gửi yêu cầu AJAX
+                $.ajax({
+                    url: "/Admin/Post/DeleteConfirmed/" + id,
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        if (data.success) {
+                            // Xóa thành công
+                            console.log("Xóa thành công");
+                            // Xóa phần tử HTML tương ứng từ bảng
+                            $('#PostRow_' + id).remove();
+                            performSearch('');
+                        } else {
+                            // Xóa không thành công
+                            performSearch('');
+                            console.log("Xóa không thành công: " + data.message);
+                        }
+                    },
+                    error: function (error) {
+                        console.log("Lỗi trong quá trình xóa:", error);
+                    }
+                });
+            } else {
+                console.log("Xóa đã hủy");
+            }
+        }
+
+        function searchPost() {
+            // Lấy giá trị từ trường nhập liệu
+            var searchString = $('#searchInput').val();
+
+            // Gọi hàm tìm kiếm với giá trị từ trường nhập liệu
+            performSearch(searchString);
+        }
+
+        function performSearch(searchString) {
+            // Thực hiện AJAX để tìm kiếm với giá trị từ trường nhập liệu
+            $.ajax({
+                url: "/Admin/Post/Search",
+                type: "GET",
+                data: { searchString: searchString },
+                success: function (data) {
+                    // Cập nhật nội dung của các dòng trong bảng với kết quả tìm kiếm
+                    $('table tbody').html($(data).find('tbody').html());
+                },
+                error: function (error) {
+                    console.log("Error during search:", error);
+                }
+            });
+        }
+
+    </script>
+</head>
+<body>
+    <p>
+        <a href="/Admin/Post/Create" class="btn btn-primary">Create New</a>
+    </p>
+    <!-- Trường nhập liệu -->
+    <input type="text" id="searchInput" placeholder="Nhập từ khóa">
+
+    <!-- Nút tìm kiếm -->
+    <button class="btn btn-primary" onclick="searchPost()">Tìm kiếm</button>
+    <table>
+        <tr>
+            <th>
+                Title
+            </th>
+            <th>
+                Content
+            </th>
+            <th>
+                Images
+            </th>
+            <th>
+                Author
+            </th>
+            <th>
+                Posting Date
+            </th>
+            <th>
+                Likes
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                Category ID
+            </th>
+            <th>
+                Client ID
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.content)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.images)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.posting_date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.likes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.category_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.client_id)
+                </td>
+                <td>
+                    <a href="/Admin/Post/Edit/@item.id" class="btn btn-warning">Edit</a> |
+
+                    <a href="#" class="btn btn-danger" onclick="confirmDelete(@item.id)">Delete</a>
+                </td>
+            </tr>
+        }
+    </table>
+
+
+</body>
+</html>
